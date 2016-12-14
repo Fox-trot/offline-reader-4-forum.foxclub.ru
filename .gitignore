@@ -301,3 +301,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.foxclub
+*.category
+*.zip
+*.7z
+*.BAK
+*.exe
+*.gif

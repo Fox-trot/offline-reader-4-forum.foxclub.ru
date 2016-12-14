@@ -1,0 +1,1 @@
+LPARAMETERS cParamRETURN IIF(ISDIGIT(cParam) AND VAL(cParam)=0,0,1)
