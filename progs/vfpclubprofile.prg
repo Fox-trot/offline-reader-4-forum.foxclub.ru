@@ -105,9 +105,9 @@ IF !EMPTY(m.iParam) AND IIF(ABS(m.iParam) = ABS(user.iuser), .T., SEEK(ABS(m.iPa
 			ENDSCAN
 			USE
 		ENDIF
-		IF !EMPTY(_Screen.NormalMode)
+*!*			IF !EMPTY(_Screen.NormalMode)
 			=AppErase(m.cParam)
-		ENDIF
+*!*			ENDIF
 		IF !EMPTY(aa(4)) AND EMPTY(aa(5))
 			aa(5) = vfpclubsaymecountry(aa(4))
 		ENDIF
