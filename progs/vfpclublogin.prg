@@ -1,4 +1,4 @@
-LOCAL nCount
+LOCAL lError
 LOCAL ARRAY aa[1]
 DO vfpclubdbc
 DO vfpclubini
@@ -7,7 +7,8 @@ WITH _Screen
 	.UserID=VAL(SYS(2007, .UserName))
 	DO vfpclubini WITH ,TRANSFORM(.UserID)
 	DO AppSystem
-	IF !EMPTY(.DownLoadWhenStart)
+	lError = (ADIR(aa, .Comment+[*.err]) > 0)
+	IF !EMPTY(.DownLoadWhenStart) AND !lError
 		vfpclubDownloadRSS()
 	ENDIF
 	DO vfpclubMenu
@@ -15,7 +16,7 @@ WITH _Screen
 	IF NOT DTOS(DATE()) == INIRead(.ini, "Main", "LastStart")
 		=INIWrite(.ini, "Main", "LastStart", DTOS(DATE()))
 		DO CASE
-		CASE !EMPTY(ADIR(aa, .Comment+[*.err]))
+		CASE !lError
 			SELECT 0 AS nCount FROM club!category WHERE .F. INTO CURSOR c1
 		CASE .RemindBirthDays=1
 			SELECT CNT(user.iuser) AS nCount;

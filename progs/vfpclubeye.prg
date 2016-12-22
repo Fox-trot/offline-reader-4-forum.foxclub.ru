@@ -11,7 +11,7 @@ CASE VARTYPE(_Screen.aeye(m.nParam))="O"
 	_Screen.aeye(m.nParam).Show
 CASE m.nParam=17
 	DO FORM vfpclubeye03 NAME _Screen.aeye(m.nParam) WITH m.uParam
-CASE INLIST(m.nParam,7,8,9,18)
+CASE INLIST(m.nParam,7,8,9,18,20)
 	DO FORM vfpclubeye02 NAME _Screen.aeye(m.nParam) WITH m.nParam, m.uParam, m.uParam2
 CASE BETWEEN(m.nParam, 1, 19)
 	DO FORM vfpclubeye01 NAME _Screen.aeye(m.nParam) WITH m.nParam, m.uParam

@@ -3,7 +3,7 @@ WITH _Screen
 	DO CASE
 	CASE EMPTY(m.uParam)
 		.ADDPROPERTY("adox[6]")
-		.ADDPROPERTY("aeye[19]")
+		.ADDPROPERTY("aeye[20]")
 		.ADDPROPERTY("alib[6]")
 		.ADDPROPERTY("aview[6]")
 		

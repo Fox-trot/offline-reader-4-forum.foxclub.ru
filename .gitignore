@@ -317,4 +317,4 @@ graphics/*.jpg
 *.ini
 *.PNG
 *_ref.*
-s1.PJ*
+*.err

@@ -1,6 +1,6 @@
 LPARAMETERS dParam, lParam
 DO CASE
-CASE IIF(EMPTY(dParam), .T., !VARTYPE(dParam)$"DT")
+CASE EMPTY(dParam) OR !VARTYPE(dParam)$"DT"
 	RETURN IIF(EMPTY(lParam),SPACE(10),00)
 CASE MONTH(dParam)*100+DAY(dParam)>=1222 OR MONTH(dParam)*100+DAY(dParam)<=119
 	RETURN IIF(EMPTY(lParam),"Козерог",10)
