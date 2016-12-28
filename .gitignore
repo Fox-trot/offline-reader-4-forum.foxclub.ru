@@ -1,13 +1,25 @@
+############
+## xBase
+############
 *.FXP
+*.BAK
+*.app
+*.exe
+*_ref.*
+*.err
+*.log
+*.act
+*.lst
+*.tbl
+foxuser.*
+*.ini
+
+
+## 4me
+*.gif
+*.PNG
+graphics/*.jpg
 *.foxclub
 *.category
 *.zip
 *.7z
-*.BAK
-*.exe
-*.gif
-graphics/*.jpg
-*.ini
-*.PNG
-*_ref.*
-*.err
