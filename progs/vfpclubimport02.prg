@@ -54,10 +54,14 @@ FOR xx=1 TO ALEN(aa,1)
 			IF post.icategory # x1.icategory
 				REPLACE icategory WITH x1.icategory
 			ENDIF
+			DO CASE
+			CASE post.ipost = x1.thread AND !EMPTY(post.ipost2)
+				REPLACE ipost2 WITH 0
+			CASE post.ipost = x1.thread
 *!*				IF x1.Parent>0 AND post.ipost2 # IIF(EMPTY(_Screen.TreeAsIs), x1.thread, x1.Parent)
-			IF post.ipost2 # IIF(EMPTY(_Screen.TreeAsIs), x1.thread, x1.Parent)
+			CASE post.ipost2 # IIF(EMPTY(_Screen.TreeAsIs), x1.thread, x1.Parent)
 				REPLACE ipost2 WITH IIF(EMPTY(_Screen.TreeAsIs), x1.thread, x1.Parent)
-			ENDIF
+			ENDCASE
 			IF NOT ALLTRIM(post.cpost)==ALLTRIM(x1.subject)
 				REPLACE cpost WITH LTRIM(x1.subject)
 			ENDIF
