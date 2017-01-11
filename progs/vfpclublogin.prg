@@ -16,7 +16,7 @@ WITH _Screen
 	IF NOT DTOS(DATE()) == INIRead(.ini, "Main", "LastStart")
 		=INIWrite(.ini, "Main", "LastStart", DTOS(DATE()))
 		DO CASE
-		CASE !lError
+		CASE lError
 			SELECT 0 AS nCount FROM club!category WHERE .F. INTO CURSOR c1
 		CASE .RemindBirthDays=1
 			SELECT CNT(user.iuser) AS nCount;
