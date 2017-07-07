@@ -9,7 +9,8 @@ CASE VARTYPE(_Screen.adox(m.nParam))="O"
 			=SEEK(m.uParam, "category", "icategory")
 			DO CASE
 			CASE m.nParam=2
-				_Screen.adox(m.nParam).chkFind.Value=0
+				_Screen.adox(m.nParam).chkCpost.Value=1
+				_Screen.adox(m.nParam).chkMpost.Value=1
 				_Screen.adox(m.nParam).chkCategory.Value=1
 				_Screen.adox(m.nParam).cboCategory.Value=category.ccategory
 			CASE INLIST(_Screen.PostViewer,1,11)

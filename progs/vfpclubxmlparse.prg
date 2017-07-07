@@ -126,7 +126,9 @@ CASE FLOCK()
 		mcategory2 WITH m.link,;
 		lcategory WITH IIF(m.xx<0, !EMPTY(_Screen.SaveLink), .F.),;
 		ncategory WITH IIF(m.xx<0, _Screen.RSSGroupMethod, 0)
-*!*		REPLACE ilink WITH m.xx
+	IF link.nlink < 0
+		REPLACE link.llink WITH .T.
+	ENDIF
 OTHERWISE
 	RETURN 0
 ENDCASE
@@ -234,7 +236,7 @@ IF m.yy>0
 				IF [;]$(m.description)
 					STORE STRTRAN(m.description, [ & amp;], [ &amp;]) TO description
 					STORE STRTRAN(m.description, [& quot;], [&quot;]) TO description
-					STORE STRTRAN(m.description, [ quot;], [&quot;]) TO description
+*!*						STORE STRTRAN(m.description, [ quot;], [&quot;]) TO description
 				ENDIF
 				IF mpost # m.description AND !EMPTY(m.description)
 					REPLACE mpost WITH m.description

@@ -51,14 +51,14 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT link.ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.llink=.F. AND EMPTY(link.mlink)=.F.;
+			WHERE link.icategory = 0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 		UNION;
 		SELECT link.ilink, MAX(post.tpost);
 			FROM club!link;
 			INNER JOIN club!category ON link.icategory = category.icategory;
 			INNER JOIN club!post ON category.icategory = post.icategory;
-			WHERE link.ilink>0 AND link.llink=.T. AND EMPTY(link.mlink)=.F.;
+			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 			HAVING MAX(post.tpost) > yyy;
 			INTO CURSOR x1;
@@ -67,14 +67,14 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT link.ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.ilink>0 AND link.llink=.F. AND EMPTY(link.mlink)=.F.;
+			WHERE link.icategory = 0 AND link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 		UNION;
 		SELECT link.ilink, MAX(post.tpost);
 			FROM club!link;
 			INNER JOIN club!category ON link.icategory = category.icategory;
 			INNER JOIN club!post ON category.icategory = post.icategory;
-			WHERE link.ilink>0 AND link.llink=.T. AND EMPTY(link.mlink)=.F.;
+			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 			HAVING MAX(post.tpost) > yyy;
 			INTO CURSOR x1;
@@ -89,7 +89,7 @@ IF !EMPTY(_Screen.InternetInUse)
 		_Screen.livewallpaper.StopStart("Get data from Internet")
 	ENDCASE
 *!*	скачиваем информацию из интернета
-	SCAN ALL FOR ABS(tlink-DATETIME())>_Screen.MinUpdatePeriod AND SEEK(ilink, "link", "abs")
+	SCAN ALL FOR ABS(tlink-DATETIME())>_Screen.MinUpdatePeriod AND SEEK(ilink, "link", "ilink")
 		AppProgressBar(RECNO(), RECCOUNT(), "Get data from Internet")
 		DO CASE
 		CASE IIF(EMPTY(m.uParam), .F., _Screen.lStop)
