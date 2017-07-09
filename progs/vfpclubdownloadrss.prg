@@ -18,25 +18,26 @@ STORE DTOT(DATE()-_Screen.InternetInUse) TO yyy
 IF !EMPTY(_Screen.InternetInUse)
 *!*	формирование списка ссылок
 	DO CASE
-	CASE !EMPTY(m.nParam) AND INDEXSEEK(m.nParam, .F., "category", "icategory")
-		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink, .F.;
-			FROM club!link;
-			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.icategory=m.nParam AND EMPTY(link.mlink)=.F.;
-			GROUP BY 1,3;
-			UNION;
-			SELECT ABS(link.ilink), yyy, .T.;
-			FROM club!link;
-			WHERE link.icategory=0 AND EMPTY(link.mlink)=.F.;
-			GROUP BY 1,3;
-			INTO CURSOR x1 ORDER BY 3,2
 	CASE !EMPTY(m.nParam)
+*!*		AND INDEXSEEK(m.nParam, .F., "category", "icategory")
 		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.ilink=m.nParam AND EMPTY(link.mlink)=.F.;
+			WHERE (link.ilink=m.nParam OR link.icategory=m.nParam) AND EMPTY(link.mlink)=.F.;
 			GROUP BY 1;
-			INTO CURSOR x1
+			UNION;
+			SELECT ABS(link.ilink), yyy;
+			FROM club!link;
+			WHERE link.icategory=0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
+			INTO CURSOR x1;
+			ORDER BY 1 DESC,2
+*!*		CASE !EMPTY(m.nParam)
+*!*			SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
+*!*				FROM club!link;
+*!*				LEFT JOIN club!link2 ON link.ilink = link2.ilink;
+*!*				WHERE link.ilink=m.nParam AND EMPTY(link.mlink)=.F.;
+*!*				GROUP BY 1;
+*!*				INTO CURSOR x1
 	CASE NOT LEFT(INIRead(_Screen.ini, "Main", "LastUpdate"), 7) == LEFT(DTOS(DATE()), 7)
 		yyy = GOMONTH(m.yyy, -6)
 		SELECT link.ilink, MAX(post.tpost) AS tlink;
@@ -89,7 +90,7 @@ IF !EMPTY(_Screen.InternetInUse)
 		_Screen.livewallpaper.StopStart("Get data from Internet")
 	ENDCASE
 *!*	скачиваем информацию из интернета
-	SCAN ALL FOR ABS(tlink-DATETIME())>_Screen.MinUpdatePeriod AND SEEK(ilink, "link", "ilink")
+	SCAN ALL FOR ABS(tlink-DATETIME())>_Screen.MinUpdatePeriod AND SEEK(ilink, "link", "abs")
 		AppProgressBar(RECNO(), RECCOUNT(), "Get data from Internet")
 		DO CASE
 		CASE IIF(EMPTY(m.uParam), .F., _Screen.lStop)
