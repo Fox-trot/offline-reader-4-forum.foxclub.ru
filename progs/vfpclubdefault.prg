@@ -1,11 +1,15 @@
 LPARAMETERS nParam
 DO CASE
-CASE EMPTY(m.nParam) AND !USED("quote")
-	USE club!quote IN 0
+CASE EMPTY(m.nParam)
+	IF !USED("quote")
+		USE club!quote IN 0
+	ENDIF
 	SELECT quote
 CASE m.nParam=1
 	DO vfpclubdefault WITH 0
-	DELETE ALL FOR BETWEEN(iquote, -120, 0)=.T.
+	
+	DELETE ALL FOR BETWEEN(iquote, -121, 0)=.T.
+	
 	INSERT INTO quote (iquote, cquote, cquote2) VALUES (-1, '[b]', '<b>')
 	INSERT INTO quote (iquote, cquote, cquote2) VALUES (-2, '[/b]', '</b>')
 	INSERT INTO quote (iquote, cquote, cquote2) VALUES (-3, '[i]', '<i>')
@@ -45,7 +49,7 @@ CASE m.nParam=1
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-62, '[sm017]', '017.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-63, '[sm021]', '021.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-64, '[sm039]', '039.gif', .T.)
-	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-65, '[sm055]', '055.gif', .T.)
+	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-65, '[sm055]', '55.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-66, '[sm128]', '128.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-67, ':danc:', 'ap.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-68, ':doom:', 'an.gif', .T.)
@@ -101,9 +105,11 @@ CASE m.nParam=1
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-118, '<g>', 'smile000.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-119, ':hi:', 'hi.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-120, ':love1:', 'give_heart.gif', .T.)
-	
+	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-121, ':rux:', 'russian.gif', .T.)
+
 CASE m.nParam=2
 	DO vfpclubdefault WITH 0
+	
 	DELETE ALL FOR BETWEEN(iquote, 0, 42)=.T.
 	INSERT INTO quote (iquote, cquote) VALUES (1, '[b]')
 	INSERT INTO quote (iquote, cquote) VALUES (2, '[/b]')
