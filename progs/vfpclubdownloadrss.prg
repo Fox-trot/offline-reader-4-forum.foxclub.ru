@@ -52,7 +52,7 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.icategory = 0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
+			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 		UNION;
 		SELECT ABS(link.ilink), MAX(post.tpost);
@@ -68,16 +68,8 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT link.ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.icategory = 0 AND link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
-			GROUP BY 1;
-		UNION;
-		SELECT link.ilink, MAX(post.tpost);
-			FROM club!link;
-			INNER JOIN club!category ON link.icategory = category.icategory;
-			INNER JOIN club!post ON category.icategory = post.icategory;
 			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
-			HAVING MAX(post.tpost) > yyy;
 			INTO CURSOR x1;
 			ORDER BY 2,1
 	ENDCASE
