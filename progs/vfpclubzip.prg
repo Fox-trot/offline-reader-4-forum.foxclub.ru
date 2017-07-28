@@ -11,6 +11,7 @@ IF m.nParam>0
 		FROM club!post;
 		INNER JOIN club!link ON post.icategory=link.icategory;
 		INNER JOIN club!category ON post.icategory=category.icategory;
+		LEFT JOIN club!user ON post.iuser = ABS(user.iuser);
 		WHERE post.lzip=.F. AND TTOD(post.tpost)<m.dZip;
 		AND post.lpost=.T.;
 		AND link.ilink<0;
@@ -20,7 +21,7 @@ IF m.nParam>0
 		FROM club!post;
 		INNER JOIN club!link ON post.icategory=link.icategory;
 		WHERE post.ipost2=0 AND post.tpost<m.dZip;
-		AND post.lzip=.F. AND post.lpost=.T.;
+		AND post.lzip=.F. AND (post.lpost=.T. OR user.iuser<0);
 		AND link.ilink>0;
 		AND ABS(post.ipost) NOT IN (SELECT post2.ipost2 FROM club!post AS post2 WHERE post2.ipost2>0);
 		INTO CURSOR x2 ORDER BY 1
