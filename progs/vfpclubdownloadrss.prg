@@ -23,21 +23,10 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE (link.ilink=m.nParam OR link.icategory=m.nParam) AND EMPTY(link.mlink)=.F.;
+			WHERE (link.ilink=m.nParam OR link.icategory=m.nParam) AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
-			UNION;
-			SELECT ABS(link.ilink), yyy;
-			FROM club!link;
-			WHERE link.icategory=0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			INTO CURSOR x1;
 			ORDER BY 1 DESC,2
-*!*		CASE !EMPTY(m.nParam)
-*!*			SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
-*!*				FROM club!link;
-*!*				LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-*!*				WHERE link.ilink=m.nParam AND EMPTY(link.mlink)=.F.;
-*!*				GROUP BY 1;
-*!*				INTO CURSOR x1
 	CASE NOT LEFT(INIRead(_Screen.ini, "Main", "LastUpdate"), 7) == LEFT(DTOS(DATE()), 7)
 		yyy = GOMONTH(m.yyy, -6)
 		SELECT link.ilink, MAX(post.tpost) AS tlink;
@@ -54,14 +43,6 @@ IF !EMPTY(_Screen.InternetInUse)
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
 			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0) AND link2.nlink2>0;
 			GROUP BY 1;
-		UNION;
-		SELECT ABS(link.ilink), MAX(post.tpost);
-			FROM club!link;
-			INNER JOIN club!category ON link.icategory = category.icategory;
-			INNER JOIN club!post ON category.icategory = post.icategory;
-			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
-			GROUP BY 1;
-			HAVING MAX(post.tpost) > yyy;
 			INTO CURSOR x1;
 			ORDER BY 2,1
 	OTHERWISE
