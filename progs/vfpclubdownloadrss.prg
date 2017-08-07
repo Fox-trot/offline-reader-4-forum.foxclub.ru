@@ -23,7 +23,7 @@ IF !EMPTY(_Screen.InternetInUse)
 		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE (link.ilink=m.nParam OR link.icategory=m.nParam) AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
+			WHERE EMPTY(link.mlink)=.F. AND (link.ilink=m.nParam OR link.icategory=m.nParam);
 			GROUP BY 1;
 			INTO CURSOR x1;
 			ORDER BY 1 DESC,2

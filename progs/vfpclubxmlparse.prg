@@ -299,7 +299,11 @@ IF m.yy>0
 					icategory WITH m.mycat,;
 					iuser WITH ABS(user.iuser)
 				IF ipost2>0 AND SEEK(ipost2, "post2") AND post2.lzip=.T.
-					REPLACE lzip WITH .T.
+					IF user.iUser > 0
+						REPLACE lzip WITH .F. IN post2
+					ELSE
+						REPLACE lzip WITH .T.
+					ENDIF
 				ENDIF
 				IF !EMPTY(_Screen.Blacklist) AND user.iuser<0 AND EMPTY(lpost)
 					REPLACE lpost WITH .T.
