@@ -8,7 +8,7 @@ CASE EMPTY(m.nParam)
 CASE m.nParam=1
 	DO vfpclubdefault WITH 0
 	
-	DELETE ALL FOR BETWEEN(iquote, -121, 0)=.T.
+	DELETE ALL FOR BETWEEN(iquote, -122, 0)=.T.
 	
 	INSERT INTO quote (iquote, cquote, cquote2) VALUES (-1, '[b]', '<b>')
 	INSERT INTO quote (iquote, cquote, cquote2) VALUES (-2, '[/b]', '</b>')
@@ -106,6 +106,7 @@ CASE m.nParam=1
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-119, ':hi:', 'hi.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-120, ':love1:', 'give_heart.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-121, ':rux:', 'russian.gif', .T.)
+	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-122, ':dan:', 'dan.gif', .T.)
 
 CASE m.nParam=2
 	DO vfpclubdefault WITH 0
