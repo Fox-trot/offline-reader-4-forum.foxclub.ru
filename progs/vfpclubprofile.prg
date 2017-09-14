@@ -113,8 +113,9 @@ IF !EMPTY(m.iParam) AND IIF(ABS(m.iParam) = ABS(user.iuser), .T., SEEK(ABS(m.iPa
 		ENDIF
 		xx = 0
 		FOR zz=1 TO ALEN(_Screen.UserMemo)
+			aa(m.zz) = ALLTRIM(aa(m.zz))
 			cReturn = m.cReturn + aa(m.zz)+IIF(m.zz=ALEN(_Screen.UserMemo), "", CHRF)
-			xx = m.xx + LEN(aa(m.zz))
+			xx = m.xx + IIF(EMPTY(aa(m.zz)), 0, 1)
 		ENDFOR
 		IF m.xx=0
 			cReturn = []
