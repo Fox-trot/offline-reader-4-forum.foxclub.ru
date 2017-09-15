@@ -54,7 +54,7 @@ WITH _SCREEN.oXS.Sheets(1)
 	.Cells(2,4).VALUE="E-Mail"
 	.Cells(2,5).VALUE="ICQ"
 	.Cells(2,6).VALUE="Skype"
-	DO appExcel WITH 7
+	DO appExcel WITH 7, "A2:F2"
 	STORE 3 TO rr
 	_SCREEN.livewallpaper.StopStart("Формирование отчета")
 	DO WHILE !EOF()

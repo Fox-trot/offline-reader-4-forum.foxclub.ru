@@ -109,14 +109,14 @@ CASE m.nParam=7 AND !EMPTY(_Screen.ExcelBorder)
 			.RANGE(m.uParam).Borders(3).LineStyle,;
 			.RANGE(m.uParam).Borders(4).LineStyle
 	ENDWITH
-CASE m.nParam=8 AND IIF(EMPTY(m.uParam), EMPTY(_Screen.NormalMode), .T.)
-	WITH _Screen.oXS
-		IF IIF(EMPTY(m.uParam), .APPLICATION.MemoryTotal/.APPLICATION.MemoryUsed < 2, .T.)
-			MESSAGEBOX(IIF(EMPTY(m.uParam), "Распределение памяти", m.uParam);
-				+CHR(13)+"Всего"+STR(.APPLICATION.MemoryTotal/1000);
-				+CHR(13)+"Использовано"+STR(.APPLICATION.MemoryUsed/1000), 64, "MS Excel",_Screen.MBTimeout)
-		ENDIF
-	ENDWITH
+*!*	CASE m.nParam=8 AND IIF(EMPTY(m.uParam), EMPTY(_Screen.NormalMode), .T.)
+*!*		WITH _Screen.oXS
+*!*			IF IIF(EMPTY(m.uParam), .APPLICATION.MemoryTotal/.APPLICATION.MemoryUsed < 2, .T.)
+*!*				MESSAGEBOX(IIF(EMPTY(m.uParam), "Распределение памяти", m.uParam);
+*!*					+CHR(13)+"Всего"+STR(.APPLICATION.MemoryTotal/1000);
+*!*					+CHR(13)+"Использовано"+STR(.APPLICATION.MemoryUsed/1000), 64, "MS Excel",_Screen.MBTimeout)
+*!*			ENDIF
+*!*		ENDWITH
 CASE m.nParam=9 AND !EMPTY(m.uParam) AND BETWEEN(m.uParam,1,_Screen.Excel97)
 	_Screen.oXS.Sheets(1).PrintOut(m.uParam)
 CASE m.nParam=10 AND _Screen.lStop
