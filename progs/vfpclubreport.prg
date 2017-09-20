@@ -33,7 +33,7 @@ ELSE
 	CASE VARTYPE(_Screen.oXS)="O"
 		DO appExcel WITH 4,"$1:$2"
 		DO appExcel WITH 1
-		DO appExcel WITH 8
+*!*			DO appExcel WITH 8
 		=AppBlobJob(m.nParam)
 	ENDCASE
 ENDIF

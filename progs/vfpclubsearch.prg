@@ -62,7 +62,7 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
@@ -71,7 +71,7 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND (cFind $ post.cPost OR cFind $ post.mPost);
 					INTO CURSOR C1
 			ENDIF
@@ -99,7 +99,7 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
@@ -107,7 +107,7 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND (cFind $ post.cPost OR cFind $ post.mPost);
 					INTO CURSOR C1
 			ENDIF
@@ -141,7 +141,7 @@ CASE !EMPTY(chkCpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
@@ -150,7 +150,7 @@ CASE !EMPTY(chkCpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ post.cPost;
 					INTO CURSOR C1
 			ENDIF
@@ -178,7 +178,7 @@ CASE !EMPTY(chkCpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
@@ -186,7 +186,7 @@ CASE !EMPTY(chkCpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ post.cPost;
 					INTO CURSOR C1
 			ENDIF
@@ -220,7 +220,7 @@ CASE !EMPTY(chkMpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
@@ -229,7 +229,7 @@ CASE !EMPTY(chkMpost)
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
 					WHERE post.icategory = m.icategory;
-					AND post.tPost >= dFind;
+					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ post.mPost;
 					INTO CURSOR C1
 			ENDIF
@@ -257,7 +257,7 @@ CASE !EMPTY(chkMpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
@@ -265,7 +265,7 @@ CASE !EMPTY(chkMpost)
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
-					WHERE post.tPost >= dFind;
+					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ post.mPost;
 					INTO CURSOR C1
 			ENDIF
