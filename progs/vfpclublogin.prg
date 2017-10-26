@@ -9,7 +9,7 @@ WITH _Screen
 	DO AppSystem
 	lError = (ADIR(aa, .Comment+[*.err]) > 0)
 	IF !EMPTY(.DownLoadWhenStart) AND !lError
-		vfpclubDownloadRSS()
+		=vfpclubDownloadRSS()
 	ENDIF
 	DO vfpclubMenu
 

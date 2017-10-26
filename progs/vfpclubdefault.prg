@@ -100,7 +100,7 @@ CASE m.nParam=1
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-113, ';)', 'wink.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-114, ':o', 'redface.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-115, '[rtfm]', 'rtfm.gif', .T.)
-	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-116, '(to)', 'smiley24.gif', .T.)
+	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-116, '(tu)', 'smiley24.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-117, ':ct:', 'close_te.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-118, '<g>', 'smile000.gif', .T.)
 	INSERT INTO quote (iquote, cquote, cquote2, lquote) VALUES (-119, ':hi:', 'hi.gif', .T.)
