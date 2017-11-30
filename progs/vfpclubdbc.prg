@@ -1,5 +1,5 @@
 LPARAMETERS lParam
-#DEFINE nDBCVer 13
+#DEFINE nDBCVer 14
 #DEFINE cOpen "Открытие базы данных"
 #DEFINE dbcname "CLUB"
 LOCAL nn, yy, xx, comment, database, caption, field, table
@@ -421,6 +421,12 @@ CASE nn<nDBCVer
 					WHERE Category.icategory>0 AND Link.ilink<0;
 					AND EMPTY(Category.ccategory)=.F.;
 					ORDER BY 1
+			CASE yy=14
+				SELECT user
+				ALTER TABLE user DROP FOREIGN KEY TAG duser
+				ALTER TABLE user ADD COLUMN iUser2 F(15)
+				=DBSETPROP("user.iUser2", FIELD, Caption, "Идентификатор (2)")
+				INDEX ON iUser2 TAG iUser2 ADDITIVE
 			ENDCASE
 			=SYS(1104)
 			=DBSETPROP(DBC(), DATABASE, Comment, TRANSFORM(m.yy))

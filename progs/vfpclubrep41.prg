@@ -4,27 +4,31 @@ IF IIF(EMPTY(m.nParam), .T., NOT BETWEEN(m.nParam, 1, 12))
 	RETURN .F.
 ENDIF
 IF EMPTY(_Screen.BlackList)
-	SELECT VAL(RIGHT(MLINE(user.muser, 6),2)) AS nDay, user.cuser, PADR(MLINE(user.muser,2),linelen) AS cFIO,;
-		PADR(MLINE(user.muser,1), linelen) AS cEmail,;
-		PADR(MLINE(user.muser, 3), linelen) AS ICQ,;
-		PADR(MLINE(user.muser, 8), linelen) AS Skype,;
-		user.iuser;
+	SELECT TOP 65496 DISTINCT IIF(VAL(LEFT(MLINE(user2.muser,6),2))=m.nParam, VAL(RIGHT(MLINE(user2.muser,6),2)), VAL(RIGHT(MLINE(user.muser,6),2))) AS nDay, NVL(user2.cuser,user.cuser) AS cUser, NVL(PADR(MLINE(user2.muser,2),linelen), PADR(MLINE(user.muser,2),linelen)) AS cFIO,;
+		NVL(PADR(MLINE(user2.muser, 1), linelen), PADR(MLINE(user.muser,1), linelen)) AS cEmail,;
+		NVL(PADR(MLINE(user2.muser, 3), linelen), PADR(MLINE(user.muser, 3), linelen)) AS ICQ,;
+		NVL(PADR(MLINE(user2.muser, 8), linelen), PADR(MLINE(user.muser, 8), linelen)) AS Skype;
 		FROM club!user;
-		WHERE ABS(user.iuser)>0 AND user.duser>{};
-		AND EMPTY(user.muser)=.F. AND VAL(LEFT(MLINE(user.muser, 6),2))=m.nParam;
-		AND BETWEEN(VAL(RIGHT(MLINE(user.muser, 6),2)), 1, 31)=.T.;
+		LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
+		WHERE ABS(user.iuser)>0;
+		AND NVL(user2.duser, user.duser)>{};
+		AND EMPTY(NVL(user2.muser, user.muser))=.F.;
+		AND (VAL(LEFT(MLINE(user.muser,6),2))=m.nParam OR NVL(VAL(LEFT(MLINE(user2.muser,6),2)),0)==m.nParam);
+		AND (BETWEEN(VAL(RIGHT(MLINE(user.muser, 6),2)), 1, 31) OR BETWEEN(VAL(RIGHT(MLINE(NVL(user2.muser, ""), 6),2)), 1, 31));
 		INTO CURSOR R1;
 		ORDER BY 1,2
 ELSE
-	SELECT VAL(RIGHT(MLINE(user.muser, 6),2)) AS nDay, user.cuser, PADR(MLINE(user.muser,2),linelen) AS cFIO,;
-		PADR(MLINE(user.muser,1), linelen) AS cEmail,;
-		PADR(MLINE(user.muser, 3), linelen) AS ICQ,;
-		PADR(MLINE(user.muser, 8), linelen) AS Skype,;
-		user.iuser;
+	SELECT TOP 65496 DISTINCT IIF(VAL(LEFT(MLINE(user2.muser,6),2))=m.nParam, VAL(RIGHT(MLINE(user2.muser,6),2)), VAL(RIGHT(MLINE(user.muser,6),2))) AS nDay, NVL(user2.cuser,user.cuser) AS cUser, NVL(PADR(MLINE(user2.muser,2),linelen), PADR(MLINE(user.muser,2),linelen)) AS cFIO,;
+		NVL(PADR(MLINE(user2.muser, 1), linelen), PADR(MLINE(user.muser,1), linelen)) AS cEmail,;
+		NVL(PADR(MLINE(user2.muser, 3), linelen), PADR(MLINE(user.muser, 3), linelen)) AS ICQ,;
+		NVL(PADR(MLINE(user2.muser, 8), linelen), PADR(MLINE(user.muser, 8), linelen)) AS Skype;
 		FROM club!user;
-		WHERE user.iuser>0 AND user.duser>{};
-		AND EMPTY(user.muser)=.F. AND VAL(LEFT(MLINE(user.muser, 6),2))=m.nParam;
-		AND BETWEEN(VAL(RIGHT(MLINE(user.muser, 6),2)), 1, 31)=.T.;
+		LEFT JOIN club!user AS user2 ON user.iuser2 = user2.iuser;
+		WHERE user.iuser>0;
+		AND NVL(user2.duser, user.duser)>{};
+		AND EMPTY(NVL(user2.muser, user.muser))=.F.;
+		AND (VAL(LEFT(MLINE(user.muser,6),2))=m.nParam OR NVL(VAL(LEFT(MLINE(user2.muser,6),2)),0)==m.nParam);
+		AND (BETWEEN(VAL(RIGHT(MLINE(user.muser, 6),2)), 1, 31) OR BETWEEN(VAL(RIGHT(MLINE(NVL(user2.muser, ""), 6),2)), 1, 31));
 		INTO CURSOR R1;
 		ORDER BY 1,2
 ENDIF
