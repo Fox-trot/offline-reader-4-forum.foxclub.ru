@@ -250,10 +250,8 @@ IF m.yy>0
 *!*					CASE !EMPTY(m.category)
 					category=del910(m.category)
 					IF !EMPTY(IIF(category.ncategory=1, m.author, IIF(category.ncategory=2, m.category, m.title2)))
-*!*	WAIT WINDOW m.category
 						nn=vfpclubid(UPPER(IIF(category.ncategory=1, m.author, IIF(category.ncategory=2, m.category, m.title2)))+category.mcategory2)
 						REPLACE ipost2 WITH m.nn
-*!*						LOCATE FOR ABS(ipost)=m.nn
 						=SEEK(m.nn, "post", "abs")
 						DO CASE
 						CASE !FOUND()
@@ -266,7 +264,7 @@ IF m.yy>0
 						CASE icategory#m.mycat
 							LOOP
 						ENDCASE
-						IF tpost < MAX(IIF(EMPTY(m.pubdate), m.ddd, m.pubdate), tpost)
+						IF tpost <> MAX(IIF(EMPTY(m.pubdate), m.ddd, m.pubdate), tpost)
 							REPLACE tpost WITH MAX(IIF(EMPTY(m.pubdate), m.ddd, m.pubdate), tpost)
 						ENDIF
 					ENDIF
