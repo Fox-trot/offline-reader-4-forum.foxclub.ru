@@ -1,5 +1,5 @@
 LPARAMETERS nParam, uParam, iParam
-#DEFINE att "[attachment"
+#DEFINE att "[attachment "
 DO CASE
 CASE m.nParam=3 AND EMPTY(post.lZip)
 	SELECT post
