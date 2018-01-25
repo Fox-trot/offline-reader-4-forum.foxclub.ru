@@ -19,19 +19,21 @@ WITH _Screen
 		CASE lError
 			SELECT 0 AS nCount FROM club!category WHERE .F. INTO CURSOR c1
 		CASE .RemindBirthDays=1
-			SELECT CNT(user.iuser) AS nCount;
+			SELECT CNT(DIST NVL(user2.iuser, user.iuser)) AS nCount;
 				FROM club!user;
+				LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 				WHERE user.iuser>0 AND user.duser>{};
 				AND LEN(MLINE(user.muser, 6)) = 4;
 				AND MLINE(user.muser, 6) = RIGHT(DTOS(DATE()), 4);
 				INTO CURSOR c1
 		CASE .RemindBirthDays=2
-			SELECT CNT(user.iuser) AS nCount;
+			SELECT CNT(DIST NVL(user2.iuser, user.iuser)) AS nCount;
 				FROM club!user;
+				LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 				WHERE user.iuser>0 AND user.duser>{};
-				AND user.luser=.T.;
 				AND LEN(MLINE(user.muser, 6)) = 4;
 				AND MLINE(user.muser, 6) = RIGHT(DTOS(DATE()), 4);
+				HAVING MAX(user.luser)=.T.;
 				INTO CURSOR c1
 		OTHERWISE
 			SELECT 0 AS nCount FROM club!category WHERE .F. INTO CURSOR c1
