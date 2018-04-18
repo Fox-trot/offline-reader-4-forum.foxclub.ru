@@ -1,5 +1,5 @@
 IF !POPUP("shortcut")
-	DEFINE POPUP shortcut SHORTCUT
+	DEFINE POPUP shortcut FROM MROW(),MCOL() RELATIVE SHORTCUT
 *!*		DEFINE POPUP shortcut FROM MROW(),MCOL() SHORTCUT
 	DEFINE BAR _med_cut OF shortcut PROMPT "\<Вырезать" KEY CTRL+X, "Ctrl+ч" MESSAGE "Удаление выделенного фрагмента в буфер обмена"
 	*!*	&&MESSAGE "Удаление выделенного фрагмента в буфер обмена"
