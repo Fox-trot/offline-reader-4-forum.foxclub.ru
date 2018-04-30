@@ -7,8 +7,7 @@ CASE !SEEK(m.nParam1, "link", "ilink")
 	nParam1=0
 CASE !RLOCK()
 CASE link.nlink<0
-	REPLACE link.nlink WITH IIF(EMPTY(m.nParam2), 1, 0),;
-		link.llink WITH .T.
+	vfpclubblocklink(m.nParam1)
 CASE !EMPTY(m.nParam2) AND !EMPTY(link.nlink)
 	REPLACE link.nlink WITH 0
 CASE link.nlink < MIN(_Screen.MaxTryDownload, 99)

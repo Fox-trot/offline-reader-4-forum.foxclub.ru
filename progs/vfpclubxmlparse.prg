@@ -17,7 +17,7 @@ IF VARTYPE(_Screen.oXMLDoc)#"O"
 	ENDIF
 ENDIF
 IF EMPTY(_Screen.oXMLDoc.Load(m.cParam))
-	blocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
+	vfpclubblocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
 	WAIT WINDOW [Error: ]+_Screen.oXMLDoc.parseError.Reason+CHR(13)+JUSTFNAME(m.cParam) TIMEOUT _Screen.WaitTimeout
 	=appErase(m.cParam, _Screen.DeleteTempFiles=2)
 	RETURN 0
@@ -37,7 +37,7 @@ IF IIF(EMPTY(_Screen.oXMLDoc.parseError.errorCode), EMPTY(_Screen.oXMLDoc.Text),
 ENDIF
 yy=_Screen.oXMLDoc.childNodes.Length-1
 IF m.yy<1
-	blocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
+	vfpclubblocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
 	=appErase(m.cParam, _Screen.DeleteTempFiles=2)
 	RETURN 0
 ENDIF
@@ -56,7 +56,7 @@ FOR nn=0 TO yy
 	ENDTRY
 ENDFOR
 IF TYPE([_Screen.oXMLDoc.childNodes.Item(m.yy).childNodes.Item(0).childNodes])#[O]
-	blocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
+	vfpclubblocklink(VAL(GETWORDNUM(JUSTFNAME(m.cParam), 2, breake4)))
 	WAIT WINDOW [Ошибка обработки XML-файла] TIMEOUT _Screen.WaitTimeout
 	=appErase(m.cParam, _Screen.DeleteTempFiles=2)
 	RETURN 0
@@ -336,16 +336,3 @@ FUNCTION del910(cparam, zz)
 		cparam = STRTRAN(m.cparam, CHR(m.zz))
 	ENDFOR
 	RETURN m.cparam
-
-PROCEDURE blocklink
-	LPARAMETERS nParam
-	IF !EMPTY(m.nParam) AND SEEK(m.nParam, "link", "abs") AND FLOCK("link")
-		SELECT link
-		IF INDEXSEEK(link.icategory, .F., "category", "icategory")
-			REPLACE llink WITH .T.,;
-				nlink WITH MAX(nlink, 0)
-		ELSE
-			DELETE
-		ENDIF
-		UNLOCK
-	ENDIF
