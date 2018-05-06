@@ -10,10 +10,8 @@ CASE link.nlink<0
 	vfpclubblocklink(m.nParam1)
 CASE !EMPTY(m.nParam2) AND !EMPTY(link.nlink)
 	REPLACE link.nlink WITH 0
-CASE link.nlink < MIN(_Screen.MaxTryDownload, 99)
-	REPLACE link.nlink WITH link.nlink+1
 OTHERWISE
-	REPLACE link.llink WITH .T.
+	vfpclubblocklink(link.ilink)
 ENDCASE
 IF !EMPTY(m.nParam1) AND FLOCK("link2")	&& AND !EMPTY(_Screen.SaveXML)
 	SELECT link2
