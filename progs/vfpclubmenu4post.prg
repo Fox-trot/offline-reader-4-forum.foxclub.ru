@@ -16,7 +16,7 @@ CASE m.nParam=2
 	FOR xx=1 TO OCCURS(att, m.uParam)
 		yy=ALLTRIM(GETWORDNUM(SUBSTR(SUBSTR(m.uParam, AT(att, m.uParam, m.xx)), 13), 1, "]"))
 		IF !EMPTY(m.yy)
-			nParam=MAX(m.nParam, IIF(FILE(ADDBS(SYS(2023))+m.yy), .T., vfphttp(STRTRAN(_Screen.AttachmentLink, "##", TRANSFORM(m.iParam), 1, 1)+GETWORDNUM(m.yy, 1), ADDBS(SYS(2023))+m.yy)))
+			nParam=MAX(m.nParam, IIF(FILE(_Screen.ImportPath+m.yy), .T., vfphttp(STRTRAN(_Screen.AttachmentLink, "##", TRANSFORM(m.iParam), 1, 1)+GETWORDNUM(m.yy, 1), _Screen.ImportPath+m.yy)))
 		ENDIF
 	ENDFOR
 	RETURN m.nParam

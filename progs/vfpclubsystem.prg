@@ -11,7 +11,7 @@ WITH _Screen
 	CASE EMPTY(m.nParam)							&&	E X I T
 		IF IIF(EMPTY(.NoConfirmOnExit),MESSAGEBOX([Вы действительно хотите]+CHR(13)+[выйти из программы?],289,.Caption, .MBTimeout)=1,.T.)
 			.oXMLDoc = .F.
-			=AppDelBak(ADDBS(SYS(2023)), "~*.htm")
+			=AppDelBak(_Screen.ImportPath), "~*.htm")
 			=AppBlobJob(90112)
 			DO AppQUIT
 		ENDIF

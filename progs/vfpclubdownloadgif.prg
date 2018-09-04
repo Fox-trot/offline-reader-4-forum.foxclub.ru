@@ -1,7 +1,7 @@
 WITH _Screen
 	IF .InternetInUse=1 AND !EMPTY(.Quote) AND .PostViewer>10
-		IF !FILE(ADDBS(SYS(2023))+.CSS)
-			=VFPHTTP(.CSSLink+.CSS, ADDBS(SYS(2023))+.CSS)
+		IF !FILE(_Screen.ImportPath+.CSS)
+			=VFPHTTP(.CSSLink+.CSS, _Screen.ImportPath+.CSS)
 		ENDIF
 		IF !EMPTY(.Smile)
 			SELECT DISTINCT Quote.iquote, Quote.cquote2;
