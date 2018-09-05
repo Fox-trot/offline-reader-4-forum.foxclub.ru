@@ -26,7 +26,5 @@ graphics/*.jpg
 *.xml
 temp/*
 forms/form1.scx
-data/s1.DCX
 forms/form1.SCT
-data/s1.DCT
-data/s1.dbc
+data/s1.*
