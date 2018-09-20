@@ -26,7 +26,7 @@ IF !EMPTY(_Screen.InternetInUse)
 			WHERE EMPTY(link.mlink)=.F. AND (link.ilink=m.nParam OR link.icategory=m.nParam);
 			GROUP BY 1;
 			INTO CURSOR x1;
-			ORDER BY 1 DESC,2
+			ORDER BY 2 DESC
 	CASE NOT LEFT(INIRead(_Screen.ini, "Main", "LastUpdate"), 7) == LEFT(DTOS(DATE()), 7)
 		yyy = GOMONTH(m.yyy, -6)
 		SELECT link.ilink, MAX(post.tpost) AS tlink;
@@ -36,23 +36,23 @@ IF !EMPTY(_Screen.InternetInUse)
 			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F.;
 			GROUP BY 1 HAVING MAX(post.tpost) > yyy;
 			INTO CURSOR x1;
-			ORDER BY 2
+			ORDER BY 2 DESC
 	CASE EMPTY(_Screen.FoxClubRSSonly)
 		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0) AND link2.nlink2>0;
+			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 			INTO CURSOR x1;
-			ORDER BY 2,1
+			ORDER BY 2 DESC
 	OTHERWISE
 		SELECT link.ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
-			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0) AND link2.nlink2>0;
+			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
 			GROUP BY 1;
 			INTO CURSOR x1;
-			ORDER BY 2,1
+			ORDER BY 2 DESC
 	ENDCASE
 	DO CASE
 	CASE EMPTY(RECCOUNT())
