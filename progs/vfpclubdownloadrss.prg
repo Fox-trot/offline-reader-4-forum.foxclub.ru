@@ -20,7 +20,7 @@ IF !EMPTY(_Screen.InternetInUse)
 	DO CASE
 	CASE !EMPTY(m.nParam)
 *!*		AND INDEXSEEK(m.nParam, .F., "category", "icategory")
-		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
+		SELECT ABS(link.ilink) AS ilink, MAX(NVL(link2.tlink2, yyy)) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
 			WHERE EMPTY(link.mlink)=.F. AND (link.ilink=m.nParam OR link.icategory=m.nParam);
@@ -38,7 +38,7 @@ IF !EMPTY(_Screen.InternetInUse)
 			INTO CURSOR x1;
 			ORDER BY 2 DESC
 	CASE EMPTY(_Screen.FoxClubRSSonly)
-		SELECT ABS(link.ilink) AS ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
+		SELECT ABS(link.ilink) AS ilink, MAX(NVL(link2.tlink2, yyy)) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
 			WHERE EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
@@ -46,7 +46,7 @@ IF !EMPTY(_Screen.InternetInUse)
 			INTO CURSOR x1;
 			ORDER BY 2 DESC
 	OTHERWISE
-		SELECT link.ilink, NVL(MAX(link2.tlink2), yyy) AS tlink;
+		SELECT link.ilink, MAX(NVL(link2.tlink2, yyy)) AS tlink;
 			FROM club!link;
 			LEFT JOIN club!link2 ON link.ilink = link2.ilink;
 			WHERE link.ilink>0 AND EMPTY(link.mlink)=.F. AND (link.llink=.F. OR link.nlink < 0);
