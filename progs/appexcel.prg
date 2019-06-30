@@ -27,7 +27,7 @@ CASE EMPTY(m.nParam)
 		.VISIBLE=.F.
 		.EnableAnimations = .F.
 		.EnableEvents = .F.
-		.IgnoreRemoteRequests = .F.
+		.IgnoreRemoteRequests = .T.
 		.Interactive = .F.
 		.ScreenUpdating = .F.
 	ENDWITH
