@@ -27,4 +27,4 @@ graphics/*.jpg
 temp/*
 forms/form1.scx
 forms/form1.SCT
-data/s1.*
+data/*
