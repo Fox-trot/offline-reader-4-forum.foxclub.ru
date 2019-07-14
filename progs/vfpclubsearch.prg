@@ -39,37 +39,41 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 	IF !EMPTY(m.icategory)
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND (cFind $ post.cPost OR cFind $ post.mPost);
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND (cFind $ post.cPost OR cFind $ post.mPost);
@@ -79,34 +83,38 @@ CASE !EMPTY(chkCpost) AND !EMPTY(chkMpost)
 	ELSE
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE (cFind $ post.cPost OR cFind $ post.mPost);
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND (cFind $ LOWER(post.cPost) OR cFind $ LOWER(post.mPost));
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND (cFind $ post.cPost OR cFind $ post.mPost);
 					INTO CURSOR C1
@@ -118,37 +126,41 @@ CASE !EMPTY(chkCpost)
 	IF !EMPTY(m.icategory)
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND cFind $ post.cPost;
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ post.cPost;
@@ -158,34 +170,38 @@ CASE !EMPTY(chkCpost)
 	ELSE
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE cFind $ post.cPost;
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.cPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ post.cPost;
 					INTO CURSOR C1
@@ -197,37 +213,41 @@ CASE !EMPTY(chkMpost)
 	IF !EMPTY(m.icategory)
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND cFind $ post.mPost;
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE post.icategory = m.icategory;
 					AND TTOD(post.tPost) >= dFind;
 					AND cFind $ post.mPost;
@@ -237,34 +257,38 @@ CASE !EMPTY(chkMpost)
 	ELSE
 		IF EMPTY(dFind)
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE cFind $ post.mPost;
 					INTO CURSOR C1
 			ENDIF
 		ELSE
 			IF EMPTY(chkWord)
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ LOWER(post.mPost);
 					INTO CURSOR C1
 			ELSE
-				SELECT post.cpost, user.cuser, post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
+				SELECT post.cpost, NVL(user2.cuser, user.cuser), post.tpost, category.cCategory, post.ipost, post.ipost2, post.lpost;
 					FROM club!post;
 					INNER JOIN club!category ON post.iCategory = category.iCategory;
 					INNER JOIN club!user ON post.iuser = user.iuser;
+					LEFT JOIN club!user AS user2 ON user.iuser2 = ABS(user2.iuser);
 					WHERE TTOD(post.tPost) >= dFind;
 					AND cFind $ post.mPost;
 					INTO CURSOR C1
